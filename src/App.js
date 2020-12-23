@@ -1,10 +1,13 @@
 
 import './App.css';
 import Header from './Components/Header';
-import Products from './Components/Products';
+
 import Messenger from './Components/Messenger';
 import Carts from './Components/Carts';
 import Footer from './Components/Footer';
+import ProductsContainer from './Containers/ProductsContainer';
+import CartContainer from './Containers/CartContainer';
+import MessengerContainer from './Containers/MessengerContainer';
 
 function App() {
   return (
@@ -15,13 +18,13 @@ function App() {
         <main id="mainContainer">
           <div className="container">
             {/* Products */}
-            <Products/>
+            <ProductsContainer/>
        
             {/* Message */}
-          <Messenger/>
+         <MessengerContainer/>
             {/* Cart */}
         
-              <Carts/>
+              <CartContainer/>
           </div>
         </main>
         {/* Footer */}

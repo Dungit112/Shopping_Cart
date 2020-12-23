@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import * as Messenger from './../Constants/Messenger';
 
 class Product extends Component {
+
+  onAddToCart = (product) =>{
+    this.props.onAddToCart(product);
+    this.props.onChangeMessenger(Messenger.MSG_ADD_TO_CART_SUCCESS);
+  }
+
     render() {
 
       var {product} = this.props;
@@ -9,8 +16,8 @@ class Product extends Component {
             <div className="col-lg-4 col-md-6 mb-r">
             <div className="card text-center card-cascade narrower">
               <div className="view overlay hm-white-slight z-depth-1">
-                <img src={this.props.image}
-                 className="img-fluid" alt={this.props.name} />
+                <img src={product.image}
+                 className="img-fluid" alt={product.name} />
                 <a>
                   <div className="mask waves-light waves-effect waves-light" />
                 </a>
@@ -18,33 +25,22 @@ class Product extends Component {
               <div className="card-body">
                 <h4 className="card-title">
                   <strong>
-                    <a>{this.props.name }</a>
+                    <a>{product.name }</a>
                   </strong>
                 </h4>
                 <ul className="rating">
                   <li>
-                    <i className="fa fa-star" />
+                    {this.showRatings(product.rating)}
                   </li>
-                  <li>
-                    <i className="fa fa-star" />
-                  </li>
-                  <li>
-                    <i className="fa fa-star" />
-                  </li>
-                  <li>
-                    <i className="fa fa-star" />
-                  </li>
-                  <li>
-                    <i className="fa fa-star" />
-                  </li>
+                
                 </ul>
                 <p className="card-text">
-                 {this.props.description}
+                 {product.description}
                 </p>
                 <div className="card-footer">
-                  <span className="left">{this.props.price}$</span>
+                  <span className="left">{product.price}$</span>
                   <span className="right">
-                    <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top">
+                    <a onClick = {() => this.onAddToCart(product)}  className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top">
                       <i className="fa fa-shopping-cart" />
                     </a>
                   </span>
@@ -55,6 +51,18 @@ class Product extends Component {
         
         );
     }
+
+    showRatings (rating) {
+      var result = [];
+      for (var i=1 ; i<= rating; i++){
+        result.push(<i key={i} className="fa fa-star" /> );
+      }
+      for(var j =1 ; j<= (5-rating); j++){
+        result.push(<i key={i+j} className="fa fa-star-o" /> );
+      }
+      return result;
+    }
+
 }
 
 export default Product;
